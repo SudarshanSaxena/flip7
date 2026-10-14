@@ -23,6 +23,8 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Point lockfile at the public npm registry
+        run: sed -i 's#https://art01.corp.pingidentity.com/api/npm/npm-virtual/#https://registry.npmjs.org/#g' package-lock.json
       - run: npm ci
       - run: npx ng build --base-href /${{ github.event.repository.name }}/
       - uses: actions/upload-pages-artifact@v3
